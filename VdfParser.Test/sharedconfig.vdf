@@ -1,0 +1,1503 @@
+"UserRoamingConfigStore"
+{
+	"Software"
+	{
+		"Valve"
+		{
+			"Steam"
+			{
+				"StartMenuShortcutCheck"		"1"
+				"DesktopShortcutCheck"		"1"
+				"SurveyDate"		"2017-07-03"
+				"SurveyDateVersion"		"2586173360812765888"
+				"SteamDefaultDialog"		"#app_store"
+				"Apps"
+				{
+					"570"
+					{
+						"tags"
+						{
+							"0"		"favorite"
+						}
+					}
+					"251570"
+					{
+						"tags"
+						{
+							"0"		"Survival & Horror"
+						}
+					}
+					"464360"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+							"2"		"Open World"
+						}
+					}
+					"646270"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Survival & Horror"
+						}
+					}
+					"499890"
+					{
+						"tags"
+						{
+							"0"		"Rhythm"
+						}
+					}
+					"473690"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"230070"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"226840"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"108710"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"202750"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"214490"
+					{
+						"tags"
+						{
+							"0"		"Survival & Horror"
+						}
+					}
+					"270880"
+					{
+						"tags"
+						{
+							"0"		"Driving & Racing"
+						}
+					}
+					"327220"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"507490"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"237990"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"452570"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"78000"
+					{
+						"tags"
+						{
+							"0"		"Puzzle"
+						}
+					}
+					"15130"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"203750"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"310560"
+					{
+						"tags"
+						{
+							"0"		"Driving & Racing"
+						}
+					}
+					"7670"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"409710"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"8850"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"409720"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"8870"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"320"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"340"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"287700"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"420290"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"396350"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"371520"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Strategy"
+						}
+					}
+					"285800"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"274190"
+					{
+						"tags"
+						{
+							"0"		"z Other Platforms"
+						}
+					}
+					"225080"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+							"2"		"Multiplayer"
+						}
+					}
+					"352890"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Multiplayer"
+							"2"		"Strategy"
+						}
+					}
+					"225420"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"255710"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"228200"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"4560"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"231430"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"240"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"337000"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"205100"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"219740"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"379720"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"289130"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"219990"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"24980"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"204100"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"311340"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"400"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"620"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"8930"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"282070"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"203160"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"200510"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"350080"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"201810"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"445980"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"270550"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"674750"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"730"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"322330"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"550"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"500"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"578080"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"611500"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"9340"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"20540"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"280220"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"203770"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"1500"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"1520"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"248610"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"71230"
+					{
+						"tags"
+						{
+							"0"		"Driving & Racing"
+						}
+					}
+					"44350"
+					{
+						"tags"
+						{
+							"0"		"Driving & Racing"
+						}
+					}
+					"378860"
+					{
+						"tags"
+						{
+							"0"		"Driving & Racing"
+						}
+					}
+					"813000"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"622590"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"399670"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"17450"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"271260"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"RPG"
+							"2"		"Strategy"
+						}
+					}
+					"418240"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"281990"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"322190"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"464920"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"237930"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"718670"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"368390"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"388410"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"383150"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"205790"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"47780"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+							"1"		"Survival & Horror"
+						}
+					}
+					"211400"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"292910"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"421050"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"435150"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"493900"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"25800"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"237430"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"493540"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"403970"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+							"1"		"Strategy"
+						}
+					}
+					"674520"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"337340"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"383870"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"410900"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"323190"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"202200"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"25890"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"394360"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"244160"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"416600"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"308600"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"587670"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"369990"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"414340"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"747350"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"236870"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"225540"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"222940"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"48000"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"424840"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"253750"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"275390"
+					{
+						"tags"
+						{
+							"0"		"Action"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"98400"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"407810"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"435400"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"367520"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"250400"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"826600"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"595140"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"215530"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"222880"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"278910"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"3700"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"63380"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"238090"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"42910"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Multiplayer"
+						}
+					}
+					"238370"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Multiplayer"
+						}
+					}
+					"397080"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+							"1"		"Multiplayer"
+						}
+					}
+					"286690"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"287390"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"466560"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"365660"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"440"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"4570"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"15620"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"56400"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"373770"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"366910"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"RPG"
+						}
+					}
+					"207170"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"650220"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"590380"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"579760"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"379430"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"17410"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"584980"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"73020"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"363440"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"243200"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"405640"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"391220"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"221680"
+					{
+						"tags"
+						{
+							"0"		"Rhythm"
+						}
+					}
+					"234650"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"391540"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"823130"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+							"1"		"Multiplayer"
+						}
+					}
+					"760060"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"233450"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"646570"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"92800"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"1510"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"241930"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"1530"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"606150"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"400450"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"514900"
+					{
+						"tags"
+						{
+							"0"		"Survival & Horror"
+						}
+					}
+					"15700"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"581270"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"264200"
+					{
+						"tags"
+						{
+							"0"		"Action"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"201790"
+					{
+						"tags"
+						{
+							"0"		"Action"
+							"1"		"Strategy"
+						}
+					}
+					"261570"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"387290"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"268400"
+					{
+						"tags"
+						{
+							"0"		"Strategy"
+						}
+					}
+					"600370"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"218620"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"291650"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"105800"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"374040"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"480490"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"394310"
+					{
+						"tags"
+						{
+							"0"		"Indie, Small, Topdown & Platform"
+						}
+					}
+					"475150"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"41500"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"410700"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"410710"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+						}
+					}
+					"524440"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"365590"
+					{
+						"tags"
+						{
+							"0"		"zz Done"
+						}
+					}
+					"272270"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"737010"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"552500"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"638970"
+					{
+						"tags"
+						{
+							"0"		"Action"
+						}
+					}
+					"520600"
+					{
+						"tags"
+						{
+							"0"		"Adventure"
+						}
+					}
+					"359100"
+					{
+						"tags"
+						{
+							"0"		"Puzzle"
+						}
+					}
+					"680360"
+					{
+						"tags"
+						{
+							"0"		"RPG"
+						}
+					}
+					"222480"
+					{
+						"tags"
+						{
+							"0"		"FPS & 3rd person shooter"
+							"1"		"Survival & Horror"
+						}
+					}
+					"434460"
+					{
+						"tags"
+						{
+							"0"		"Action"
+							"1"		"Strategy"
+						}
+					}
+					"270150"
+					{
+						"tags"
+						{
+							"0"		"Multiplayer"
+						}
+					}
+					"34270"
+					{
+						"tags"
+						{
+							"0"		"zz Uninterested"
+						}
+					}
+					"522210"
+					{
+						"tags"
+						{
+							"0"		"Action"
+							"1"		"Indie, Small, Topdown & Platform"
+						}
+					}
+				}
+			}
+		}
+	}
+}

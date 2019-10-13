@@ -1,10 +1,11 @@
-using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using Xunit;
-using VdfParser;
 
 namespace VdfParser.Test
 {
+
     public class UnitTest1
     {
         [Fact]
@@ -12,12 +13,16 @@ namespace VdfParser.Test
         {
             FileStream sharedConfig = File.OpenRead("sharedconfig.vdf");
 
-            VdfParser parser = new VdfParser(sharedConfig);
+            VdfParser parser = new VdfParser();
 
-            var result = parser.Parse();
+            dynamic result = parser.Parse(sharedConfig);
 
             Assert.Equal(result.UserRoamingConfigStore.Software.Valve.Steam.SurveyDate, "2017-07-03");
-          
+
+            var apps = result.UserRoamingConfigStore.Software.Valve.Steam.Apps as IDictionary<string, dynamic>;
+            var tags = apps["251570"].tags as IDictionary<string, dynamic>;
+
+            Assert.Equal(tags["0"], "Survival & Horror");
         }
     }
 }

@@ -4,3 +4,6 @@
 
 /.vs/VdfParser/v16
 /VdfParser.Test/obj
+/.vs/VdfParser/DesignTimeBuild
+/Steam-VDF-Parser/bin/Debug/netcoreapp2.2
+/VdfParser.Test/bin/Debug/netcoreapp2.2

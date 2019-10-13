@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Steam-VDF-Parser\VdfParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="sharedconfig.vdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

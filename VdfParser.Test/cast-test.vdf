@@ -1,0 +1,41 @@
+"Steam"
+{
+	"StartMenuShortcutCheck"		"1"
+	"DesktopShortcutCheck"		"1"
+	"SurveyDate"		"2017-07-03"
+	"SurveyDateVersion"		"2586173360812765888"
+	"SteamDefaultDialog"		"#app_store"
+	"Apps"
+	{
+		"434460"
+		{
+			"tags"
+			{
+				"0"		"Action"
+				"1"		"Strategy"
+			}
+		}
+		"270150"
+		{
+			"tags"
+			{
+				"0"		"Multiplayer"
+			}
+		}
+		"34270"
+		{
+			"tags"
+			{
+				"0"		"zz Uninterested"
+			}
+		}
+		"522210"
+		{
+			"tags"
+			{
+				"0"		"Action"
+				"1"		"Indie, Small, Topdown & Platform"
+			}
+		}
+	}
+}

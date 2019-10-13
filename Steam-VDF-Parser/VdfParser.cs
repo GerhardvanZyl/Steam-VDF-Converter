@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using VdfParser.Enums;
 
 
 namespace VdfParser
 {
+    class Tester
+    {
+        public string t { get; set; }
+    }
+
     public class VdfParser
     {
         // If we dont use a using, how does this affect memory?
@@ -21,7 +29,11 @@ namespace VdfParser
         /// <returns></returns>
         public T Parse<T>(Stream vdfFile)
         {
-            throw new NotImplementedException();
+            dynamic result = Parse(vdfFile);
+
+            T mappedResult = (T)Map(typeof(T), result);
+
+            return mappedResult;
         }
 
         /// <summary>
@@ -40,6 +52,96 @@ namespace VdfParser
 
             return result;
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectType"></param>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        private object Map(Type objectType, ExpandoObject source, bool isDictionaryType = false)
+        {
+            //We could have used a generic method, but because the type will be reflected when it is called recursively, this is the easier solution
+
+            var bindgings = new List<MemberBinding>();
+            var src = source as IDictionary<string, object>;
+            object returnObj;
+
+            if (isDictionaryType)
+            {
+                Type[] dictionaryTypes = objectType.GetGenericArguments();
+
+                Type genericDictionaryType = typeof(Dictionary<,>);
+                Type constructedDictionaryType = genericDictionaryType.MakeGenericType(dictionaryTypes);
+
+                var constructedObject = Activator.CreateInstance(constructedDictionaryType);
+
+                var returnDictionary = constructedObject as Dictionary<string, dynamic>;
+
+                var keys = src.Keys;
+
+                foreach (var key in keys)
+                {
+                    var value = (source as IDictionary<string, dynamic>)[key];
+
+                    if (value.GetType() == typeof(string))
+                    {
+                        returnDictionary.Add(key, value);
+                    }
+
+                    returnDictionary.Add(key, Map(dictionaryTypes[1], value, false));
+                }
+
+                returnObj = (object)returnDictionary;
+            }
+            else
+            {
+                returnObj = Activator.CreateInstance(objectType);
+                foreach (PropertyInfo destinationProperty in objectType.GetProperties().Where(x => x.CanWrite))
+                {
+                    SetProperty(destinationProperty, src, returnObj);
+                }
+            }
+
+            return returnObj;
+        }
+
+        private void SetProperty(PropertyInfo destinationProperty, IDictionary<string, object> sourceValue, object objectInstance)
+        {
+            string key = sourceValue.Keys.SingleOrDefault(x => x.Equals(destinationProperty.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (!string.IsNullOrEmpty(key))
+            {
+                var val = sourceValue[key];
+                Type propertyType = destinationProperty.PropertyType;
+
+                // Cant do switch, typeof(type) is not a constant type
+                // So far we have bool, datetime, string and another object
+                if (propertyType == typeof(bool))
+                {
+                    // if the type is boolean, then this source type would have been read as a string (or should have been)
+                    // Bool is used as 1 or 0.
+                    // TODO - cater for other types later
+                    destinationProperty.SetValue(objectInstance, (string)val == "1");
+                }
+                else if (propertyType == typeof(DateTime))
+                {
+                    // if the type is boolean, then this source type would have been read as a string (or should have been)
+                    destinationProperty.SetValue(objectInstance, DateTime.Parse((string)val));
+                }
+                else if (val.GetType() == typeof(ExpandoObject))
+                {
+                    bool isDictionary = propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Dictionary<,>);
+                    destinationProperty.SetValue(objectInstance, Map(propertyType, val as ExpandoObject, isDictionary));
+                }
+                else
+                {
+                    destinationProperty.SetValue(objectInstance, (string)val);
+                }
+            }
+        }
+
 
         /// <summary>
         /// The main method that reads all the keys and values in the object

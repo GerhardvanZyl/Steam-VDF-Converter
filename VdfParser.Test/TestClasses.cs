@@ -6,7 +6,7 @@ namespace VdfParser.Test
 {
     public class App
     {
-        public Dictionary<string, string> Tags { get; set; }
+        public Dictionary<string, string> Tags { get; set; } = new Dictionary<string, string>();
     }
 
     public class Root
@@ -16,7 +16,7 @@ namespace VdfParser.Test
         public DateTime SurveyDate { get; set; }
         public string SurveyDateVersion {get;set;}
         public string SteamDefaultDialog { get; set; }
-        public Dictionary<string, App> Apps { get; set; }
+        public Dictionary<string, App> Apps { get; set; } = new Dictionary<string, App>();
     }
 
     public class SteamBasic

@@ -6,16 +6,16 @@ using Xunit;
 namespace VdfParser.Test
 {
 
-    public class UnitTest1
+    public class DeserializerTests
     {
         [Fact]
         public void ParseSharedConfig()
         {
             FileStream sharedConfig = File.OpenRead("sharedconfig.vdf");
 
-            VdfParser parser = new VdfParser();
+            VdfDeserializer parser = new VdfDeserializer();
 
-            dynamic result = parser.Parse(sharedConfig);
+            dynamic result = parser.Deserialize(sharedConfig);
 
             Assert.Equal(result.UserRoamingConfigStore.Software.Valve.Steam.SurveyDate, "2017-07-03");
 
@@ -30,9 +30,9 @@ namespace VdfParser.Test
         {
             FileStream sharedConfig = File.OpenRead("cast-test-basic.vdf");
 
-            VdfParser parser = new VdfParser();
+            VdfDeserializer parser = new VdfDeserializer();
 
-            SteamBasic result = parser.Parse<SteamBasic>(sharedConfig);
+            SteamBasic result = parser.Deserialize<SteamBasic>(sharedConfig);
 
             Assert.Equal("2586173360812765888", result.SurveyDateVersion);
             Assert.True(result.DesktopShortcutCheck);
@@ -43,13 +43,28 @@ namespace VdfParser.Test
         {
             FileStream sharedConfig = File.OpenRead("cast-test.vdf");
 
-            VdfParser parser = new VdfParser();
+            VdfDeserializer parser = new VdfDeserializer();
 
-            VdfFileTestExceprt result = parser.Parse<VdfFileTestExceprt>(sharedConfig);
+            VdfFileTestExceprt result = parser.Deserialize<VdfFileTestExceprt>(sharedConfig);
 
             Assert.Equal("2586173360812765888", result.Steam.SurveyDateVersion);
             Assert.True(result.Steam.DesktopShortcutCheck);
             Assert.Equal("Strategy", result.Steam.Apps["434460"].Tags["1"]);
         }
+
+        [Fact]
+        public void ParseAndCastString()
+        {
+            string sharedConfig = File.ReadAllText("cast-test.vdf");
+
+            VdfDeserializer parser = new VdfDeserializer();
+
+            VdfFileTestExceprt result = parser.Deserialize<VdfFileTestExceprt>(sharedConfig);
+
+            Assert.Equal("2586173360812765888", result.Steam.SurveyDateVersion);
+            Assert.True(result.Steam.DesktopShortcutCheck);
+            Assert.Equal("Strategy", result.Steam.Apps["434460"].Tags["1"]);
+        }
+
     }
 }

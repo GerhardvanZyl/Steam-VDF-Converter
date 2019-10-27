@@ -11,21 +11,42 @@ using VdfParser.Enums;
 
 namespace VdfParser
 {
-    public class VdfParser
+    public class VdfDeserializer
     {
+        private enum CollectionTypes
+        {
+            None,
+            List,
+            Dictionary
+        }
+
         // If we dont use a using, how does this affect memory?
-        private StreamReader vdfFileReader;
+        private TextReader vdfFileReader;
 
         /// <summary>
-        /// Parse the VDF Stream and casts it to the supplied type*
-        /// The type has some restrictions, which will be handled by detailed exceptions (I hope)
+        /// Parse the VDF Stream and casts it to the supplied type
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <param name="vdfFile">The Stream representing the VDF file</param>
         /// <returns></returns>
-        public T Parse<T>(Stream vdfFile)
+        public T Deserialize<T>(Stream vdfFile)
         {
-            dynamic result = Parse(vdfFile);
+            dynamic result = Deserialize(vdfFile);
+
+            T mappedResult = (T)Map(typeof(T), result);
+
+            return mappedResult;
+        }
+
+        /// <summary>
+        /// Parse the VDF Stream and casts it to the supplied type
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="vdfFile">The string representing the VDF file</param>
+        /// <returns></returns>
+        public T Deserialize<T>(string vdfFile)
+        {
+            dynamic result = Deserialize(vdfFile);
 
             T mappedResult = (T)Map(typeof(T), result);
 
@@ -37,12 +58,30 @@ namespace VdfParser
         /// </summary>
         /// <param name="vdfFile">The Stream representing the VDF file</param>
         /// <returns></returns>
-        public dynamic Parse(Stream vdfFile)
+        public dynamic Deserialize(Stream vdfFile)
         {
             dynamic result = new ExpandoObject() as IDictionary<string, dynamic>;
 
             // Using the vdfFileReader to the member variable.
             using (vdfFileReader = new StreamReader(vdfFile))
+            {
+                result = ParseObject();
+            }
+
+            return result;
+        }
+
+        // <summary>
+        /// Parses a string and returns an Expando object representing the VDF file.
+        /// </summary>
+        /// <param name="vdfFile">The string representing the VDF file</param>
+        /// <returns></returns>
+        public dynamic Deserialize(string vdfFile)
+        {
+            dynamic result = new ExpandoObject() as IDictionary<string, dynamic>;
+
+            // Using the vdfFileReader to the member variable.
+            using (vdfFileReader = new StringReader(vdfFile))
             {
                 result = ParseObject();
             }
@@ -58,13 +97,13 @@ namespace VdfParser
         /// <param name="isDictionaryType">Is the targetObject a real dictionary?</param>
         /// <returns></returns>
         //We could have used a generic method, but because the type will be reflected when it is called recursively, this is the easier solution
-        private object Map(Type targetObjectType, ExpandoObject source, bool isDictionaryType = false)
+        private object Map(Type targetObjectType, ExpandoObject source, CollectionTypes colType = CollectionTypes.None)
         {
             var src = source as IDictionary<string, dynamic>;
             object returnObj;
 
             // if it is a dictionary, we need to jump throuh some reflection hoops to instantiate the correct types
-            if (isDictionaryType)
+            if (colType == CollectionTypes.Dictionary)
             {
                 // Instantiate the correct dictionary type
                 Type[] dictionaryTypes = targetObjectType.GetGenericArguments();
@@ -86,17 +125,49 @@ namespace VdfParser
                     }
                     else // It is a complex object, so we need to instantiate and map to a new object before adding it to the dictionary
                     {
-                        var arguments = new object[] 
-                        { 
-                            key, 
-                            Map(dictionaryTypes[1], value, false) // dictionaryTypes[1] is the specified type it should be cast to.
+                        var arguments = new object[]
+                        {
+                            key,
+                            Map(dictionaryTypes[1], value, CollectionTypes.None) // dictionaryTypes[1] is the specified type it should be cast to.
                         };
-                        
+
                         constructedDictionaryType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnDictionary, arguments);
                     }
                 }
 
                 returnObj = (object)returnDictionary;
+            }
+            else if (colType == CollectionTypes.List)
+            {
+                Type[] listTypes = targetObjectType.GetGenericArguments();
+                Type genericListType = typeof(List<>);
+                Type constructedListType = genericListType.MakeGenericType(listTypes);
+                var returnList = Activator.CreateInstance(constructedListType);
+
+                var keys = src.Keys; // Should only be indexes
+
+                foreach(var key in keys)
+                {
+                    var value = src[key];
+
+                    // If the value type is string, then we don't need to instantiate the value and go through the reflection code again.
+                    if (value.GetType() == typeof(string))
+                    {
+                        var arguments = new object[] { value };
+                        constructedListType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnList, arguments);
+                    }
+                    else // It is a complex object, so we need to instantiate and map to a new object before adding it to the List
+                    {
+                        var arguments = new object[]
+                        {
+                            Map(listTypes[0], value, CollectionTypes.None) // dictionaryTypes[1] is the specified type it should be cast to.
+                        };
+
+                        constructedListType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnList, arguments);
+                    }
+                }
+
+                returnObj = (object)returnList;
             }
             else // It is not a dictionary, so it is a simple property on an object that should be assigned a value.
             {
@@ -141,8 +212,24 @@ namespace VdfParser
                 }
                 else if (val.GetType() == typeof(ExpandoObject))
                 {
-                    bool isDictionary = propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Dictionary<,>);
-                    destinationProperty.SetValue(objectInstance, Map(propertyType, val as ExpandoObject, isDictionary));
+                    CollectionTypes colType;
+
+                    if (propertyType.GetInterfaces()
+                        .Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IDictionary<,>)))
+                    {
+                        colType = CollectionTypes.Dictionary;
+                    }
+                    else if (propertyType.GetInterfaces()
+                        .Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IList<>)))
+                    {
+                        colType = CollectionTypes.List;
+                    }
+                    else
+                    {
+                        colType = CollectionTypes.None;
+                    }
+                    
+                    destinationProperty.SetValue(objectInstance, Map(propertyType, val as ExpandoObject, colType));
                 }
                 else
                 {
@@ -185,11 +272,11 @@ namespace VdfParser
                 return false;
             }
 
-            // It should never reach the end of stream as it should break before then, but you never know, file could be corrupted...
-            while (!vdfFileReader.EndOfStream)
-            {
-                char c = (char)vdfFileReader.Read();
 
+            int tmp;
+            while((tmp = vdfFileReader.Read()) != -1)
+            {
+                char c = (char)tmp;
                 switch (c)
                 {
                     // Whitespace can be ignored
@@ -233,10 +320,10 @@ namespace VdfParser
         /// <returns></returns>
         private bool ReadNextKey(out string key)
         {
-            while (!vdfFileReader.EndOfStream)
+            int tmp;
+            while ((tmp = vdfFileReader.Read()) != -1)
             {
-                char c = (char)vdfFileReader.Read();
-
+                char c = (char)tmp;
                 switch (c)
                 {
                     // Whitespace can be ignored
@@ -244,6 +331,7 @@ namespace VdfParser
                     case (char)WhitespaceCharacters.NewLine:
                     case (char)WhitespaceCharacters.Space:
                     case (char)WhitespaceCharacters.Tab:
+                        Console.Write(c.ToString());
                         continue;
                         
                     // Strart of an object
@@ -265,8 +353,6 @@ namespace VdfParser
                 }
             }
 
-            // End of file, but we probably shouldn't reach this.
-            Console.WriteLine("Unexpected end of file?");
             key = "";
             return false;
         }

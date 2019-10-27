@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Steam-VDF-Parser\VdfParser.csproj" />
+    <ProjectReference Include="..\Steam-VDF-Parser\VdfConverter.csproj" />
   </ItemGroup>
 
   <ItemGroup>

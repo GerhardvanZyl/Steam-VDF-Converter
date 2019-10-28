@@ -53,6 +53,18 @@ namespace VdfParser.Test
         }
 
         [Fact]
+        public void ParseAndCastWithList()
+        {
+            FileStream sharedConfig = File.OpenRead("cast-test.vdf");
+
+            VdfDeserializer parser = new VdfDeserializer();
+
+            VdfTestExcerptUnsupported result = parser.Deserialize<VdfTestExcerptUnsupported>(sharedConfig);
+
+            Assert.Equal("Strategy", result.Steam.Apps["434460"].Tags[1]);
+        }
+
+        [Fact]
         public void ParseAndCastString()
         {
             string sharedConfig = File.ReadAllText("cast-test.vdf");

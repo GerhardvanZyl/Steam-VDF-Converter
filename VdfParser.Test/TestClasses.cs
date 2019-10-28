@@ -6,7 +6,12 @@ namespace VdfParser.Test
 {
     public class App
     {
-        public Dictionary<string, string> Tags { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> Tags { get; set; }
+    }
+
+    public class AppWithList
+    {
+        public List<string> Tags { get; set; }
     }
 
     public class Root
@@ -40,6 +45,7 @@ namespace VdfParser.Test
 
     public class UnsupportedRoot
     {
-        public List<string> Apps { get; set; }
+        public bool StartMenuShortcutCheck { get; set; }
+        public Dictionary<string, AppWithList> Apps { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using VdfParser.Enums;
-using VdfParser.Test;
 
 namespace VdfConverter
 {

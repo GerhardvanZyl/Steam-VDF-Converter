@@ -13,13 +13,6 @@ namespace VdfParser
 {
     public class VdfDeserializer
     {
-        private enum CollectionTypes
-        {
-            None,
-            List,
-            Dictionary
-        }
-
         // If we dont use a using, how does this affect memory?
         private TextReader vdfFileReader;
 
@@ -71,7 +64,7 @@ namespace VdfParser
             return result;
         }
 
-        // <summary>
+        /// <summary>
         /// Parses a string and returns an Expando object representing the VDF file.
         /// </summary>
         /// <param name="vdfFile">The string representing the VDF file</param>
@@ -94,84 +87,63 @@ namespace VdfParser
         /// </summary>
         /// <param name="targetObjectType">Type of the object to map to</param>
         /// <param name="source">Source from which to read the value</param>
-        /// <param name="isDictionaryType">Is the targetObject a real dictionary?</param>
         /// <returns></returns>
-        //We could have used a generic method, but because the type will be reflected when it is called recursively, this is the easier solution
-        private object Map(Type targetObjectType, ExpandoObject source, CollectionTypes colType = CollectionTypes.None)
+
+        // We could have used a generic method, but because the type will be reflected when it is called recursively, this is the easier solution
+        private object Map(Type targetObjectType, ExpandoObject source)
         {
+            // Expando Object is just a fancy dictionary.
             var src = source as IDictionary<string, dynamic>;
-            object returnObj;
+            
+            Type[] genericArguments = targetObjectType.GetGenericArguments();
+            dynamic returnObj = (dynamic)Activator.CreateInstance(targetObjectType);
 
-            // if it is a dictionary, we need to jump throuh some reflection hoops to instantiate the correct types
-            if (colType == CollectionTypes.Dictionary)
+            // We need a collection for the Add method
+            bool isCollection = targetObjectType
+                .GetInterfaces()
+                .Any(x =>
+                    x.IsGenericType &&
+                    x.GetGenericTypeDefinition() == typeof(ICollection<>)
+                 );
+           
+            if (isCollection)
             {
-                // Instantiate the correct dictionary type
-                Type[] dictionaryTypes = targetObjectType.GetGenericArguments();
-                Type genericDictionaryType = typeof(Dictionary<,>);
-                Type constructedDictionaryType = genericDictionaryType.MakeGenericType(dictionaryTypes);
-                var returnDictionary = Activator.CreateInstance(constructedDictionaryType);
-
-                // Loop through the values in the source, and add them to the dictionary
+                // Loop through the values in the source, and add them to the IEnumerable (probably a dictionary)
                 var keys = src.Keys;
                 foreach (var key in keys)
                 {
                     var value = src[key];
 
-                    // If the value type is string, then we don't need to instantiate the value and go through the reflection code again.
-                    if (value.GetType() == typeof(string))
+                    // If the value type is string, then we don't need to instantiate the value and go through the reflection code again,
+                    // otherwise we need to instantiate and map.
+                    // We can just check for string, since it is the only simple type we read from the file/string
+                    if (value.GetType() != typeof(string)) 
                     {
-                        var arguments = new object[] { key, value };
-                        constructedDictionaryType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnDictionary, arguments);
+                        value = Map(genericArguments[1], value);
                     }
-                    else // It is a complex object, so we need to instantiate and map to a new object before adding it to the dictionary
-                    {
-                        var arguments = new object[]
-                        {
-                            key,
-                            Map(dictionaryTypes[1], value, CollectionTypes.None) // dictionaryTypes[1] is the specified type it should be cast to.
-                        };
 
-                        constructedDictionaryType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnDictionary, arguments);
+                    // We assume that Add either takes one or two parameters
+                    // And at the moment, we will use the lazy try catch method
+                    try
+                    {
+                        returnObj.Add(key, value);
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            returnObj.Add(value);
+                        }
+                        catch(Exception e)
+                        {
+                            e.Data.Add("AdditionalErrorInfo", $"Error adding value to ICollection. Key: {key}. Value: {src[key]}");
+                            throw;
+                        }
                     }
                 }
-
-                returnObj = (object)returnDictionary;
-            }
-            else if (colType == CollectionTypes.List)
-            {
-                Type[] listTypes = targetObjectType.GetGenericArguments();
-                Type genericListType = typeof(List<>);
-                Type constructedListType = genericListType.MakeGenericType(listTypes);
-                var returnList = Activator.CreateInstance(constructedListType);
-
-                var keys = src.Keys; // Should only be indexes
-
-                foreach(var key in keys)
-                {
-                    var value = src[key];
-
-                    // If the value type is string, then we don't need to instantiate the value and go through the reflection code again.
-                    if (value.GetType() == typeof(string))
-                    {
-                        var arguments = new object[] { value };
-                        constructedListType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnList, arguments);
-                    }
-                    else // It is a complex object, so we need to instantiate and map to a new object before adding it to the List
-                    {
-                        var arguments = new object[]
-                        {
-                            Map(listTypes[0], value, CollectionTypes.None) // dictionaryTypes[1] is the specified type it should be cast to.
-                        };
-
-                        constructedListType.InvokeMember("Add", BindingFlags.InvokeMethod, null, returnList, arguments);
-                    }
-                }
-
-                returnObj = (object)returnList;
             }
             else // It is not a dictionary, so it is a simple property on an object that should be assigned a value.
             {
-                returnObj = Activator.CreateInstance(targetObjectType);
                 foreach (PropertyInfo destinationProperty in targetObjectType.GetProperties().Where(x => x.CanWrite))
                 {
                     SetProperty(destinationProperty, src, returnObj);
@@ -212,24 +184,7 @@ namespace VdfParser
                 }
                 else if (val.GetType() == typeof(ExpandoObject))
                 {
-                    CollectionTypes colType;
-
-                    if (propertyType.GetInterfaces()
-                        .Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IDictionary<,>)))
-                    {
-                        colType = CollectionTypes.Dictionary;
-                    }
-                    else if (propertyType.GetInterfaces()
-                        .Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IList<>)))
-                    {
-                        colType = CollectionTypes.List;
-                    }
-                    else
-                    {
-                        colType = CollectionTypes.None;
-                    }
-                    
-                    destinationProperty.SetValue(objectInstance, Map(propertyType, val as ExpandoObject, colType));
+                    destinationProperty.SetValue(objectInstance, Map(propertyType, val as ExpandoObject));
                 }
                 else
                 {
@@ -379,13 +334,7 @@ namespace VdfParser
                 // Check for space or tab if there wasn't a starting quote, or a double quote
                 // What about new line?
                 if ((startedWithQuote && c.Equals((char)ControlCharacters.Quote)) ||
-                    (!startedWithQuote &&
-                        (c.Equals((char)WhitespaceCharacters.CarriageReturn) ||
-                        c.Equals((char)WhitespaceCharacters.NewLine) ||
-                        c.Equals((char)WhitespaceCharacters.Space) ||
-                        c.Equals((char)WhitespaceCharacters.Tab)
-                        )
-                    ))
+                    (!startedWithQuote && IsWhiteSpace(c)))
                 {
                     cont = false;
                 }
@@ -396,6 +345,12 @@ namespace VdfParser
             }
 
             return sb.ToString();
+        }
+
+        private bool IsWhiteSpace(char c)
+        {
+            // Don't do type checking for now. It should fail if the character isn't an int.
+            return Enum.IsDefined(typeof(WhitespaceCharacters), (int)c);
         }
     }
 }

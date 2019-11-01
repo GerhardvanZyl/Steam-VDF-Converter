@@ -18,6 +18,5 @@ namespace VdfConverter
 
             return isCollection;
         }
-
     }
 }

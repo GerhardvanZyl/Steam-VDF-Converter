@@ -132,8 +132,8 @@ namespace VdfConverter
                     i++;
                 }
             }
-            // Is a key values based collection
-            else if (genericArguments.Length == 2)
+            // Is a key values based collection.
+            else if (genericArguments.Length >= 2)
             {
                 foreach (var kvp in dynamicKeyValues)
                 {
@@ -141,10 +141,6 @@ namespace VdfConverter
                     InsertTabs();
                     WriteValue(kvp.Value);
                 }
-            }
-            else // Either there are no generic types, or too many to deduce what to do with them
-            {
-                throw new Exception("Number of generic types isn't 1 or 2");
             }
         }
 

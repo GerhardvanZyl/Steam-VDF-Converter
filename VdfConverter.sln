@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VdfConverter", "Steam-VDF-Parser\VdfConverter.csproj", "{40DD0787-AAFF-44F8-8659-607A8CDA0E99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VdfParser.Test", "VdfParser.Test\VdfParser.Test.csproj", "{B939D550-21E9-4FE7-9CF2-2835EBF40D77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VdfConverter.Test", "VdfParser.Test\VdfConverter.Test.csproj", "{B939D550-21E9-4FE7-9CF2-2835EBF40D77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

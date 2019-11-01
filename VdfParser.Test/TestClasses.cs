@@ -38,12 +38,12 @@ namespace VdfParser.Test
         public Root Steam { get; set; }
     }
 
-    public class VdfTestExcerptUnsupported
+    public class VdfWithList
     {
-        public UnsupportedRoot Steam { get; set; }
+        public RootWithList Steam { get; set; }
     }
 
-    public class UnsupportedRoot
+    public class RootWithList
     {
         public bool StartMenuShortcutCheck { get; set; }
         public Dictionary<string, AppWithList> Apps { get; set; }

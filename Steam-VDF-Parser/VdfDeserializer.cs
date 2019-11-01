@@ -6,12 +6,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using VdfParser.Enums;
-
+using VdfConverter;
+using VdfConverter.Enums;
 
 namespace VdfParser
 {
-    public class VdfDeserializer
+    public class VdfDeserializer : VdfBase
     {
         // If we dont use a using, how does this affect memory?
         private TextReader vdfFileReader;
@@ -95,17 +95,12 @@ namespace VdfParser
             // Expando Object is just a fancy dictionary.
             var src = source as IDictionary<string, dynamic>;
             
+            // TODO: Check if it is generic first
             Type[] genericArguments = targetObjectType.GetGenericArguments();
             dynamic returnObj = (dynamic)Activator.CreateInstance(targetObjectType);
 
             // We need a collection for the Add method
-            bool isCollection = targetObjectType
-                .GetInterfaces()
-                .Any(x =>
-                    x.IsGenericType &&
-                    x.GetGenericTypeDefinition() == typeof(ICollection<>)
-                 );
-           
+            bool isCollection = IsCollection(targetObjectType);
             if (isCollection)
             {
                 // Loop through the values in the source, and add them to the IEnumerable (probably a dictionary)
@@ -170,6 +165,7 @@ namespace VdfParser
 
                 // Cant do switch, typeof(type) is not a constant type
                 // So far we have bool, datetime, string and another object
+                // Any other types we should cater for?
                 if (propertyType == typeof(bool))
                 {
                     // if the type is boolean, then this source type would have been read as a string (or should have been)
@@ -232,15 +228,12 @@ namespace VdfParser
             while((tmp = vdfFileReader.Read()) != -1)
             {
                 char c = (char)tmp;
+
+                // We can either call the method, or list all the characters individually in the switch. So...
+                if (IsWhiteSpace(c)) continue;
+
                 switch (c)
                 {
-                    // Whitespace can be ignored
-                    case (char)WhitespaceCharacters.CarriageReturn:
-                    case (char)WhitespaceCharacters.NewLine:
-                    case (char)WhitespaceCharacters.Space:
-                    case (char)WhitespaceCharacters.Tab:
-                        continue;
-
                     // Strart of an object
                     case (char)ControlCharacters.OpenBrace:
                         // read new object
@@ -279,16 +272,12 @@ namespace VdfParser
             while ((tmp = vdfFileReader.Read()) != -1)
             {
                 char c = (char)tmp;
+
+                // We can either call the method, or list all the characters individually in the switch. So...
+                if (IsWhiteSpace(c)) continue;
+
                 switch (c)
                 {
-                    // Whitespace can be ignored
-                    case (char)WhitespaceCharacters.CarriageReturn:
-                    case (char)WhitespaceCharacters.NewLine:
-                    case (char)WhitespaceCharacters.Space:
-                    case (char)WhitespaceCharacters.Tab:
-                        Console.Write(c.ToString());
-                        continue;
-                        
                     // Strart of an object
                     case (char)ControlCharacters.OpenBrace:
                     case (char)ControlCharacters.CloseBrace:
@@ -326,7 +315,6 @@ namespace VdfParser
             while (cont)
             {
                 char c = (char)vdfFileReader.Read();
-                Console.WriteLine(c.ToString());
 
                 //TODO - Check for escape characters: \n, \t, \\, and \"
                 // But do we really have to? We can just ignore it, cant we?

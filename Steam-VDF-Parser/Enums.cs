@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VdfParser.Enums
+﻿namespace VdfConverter.Enums
 {
     /// <summary>
     /// https://developer.valvesoftware.com/wiki/KeyValues#About_KeyValues_Text_File_Format:

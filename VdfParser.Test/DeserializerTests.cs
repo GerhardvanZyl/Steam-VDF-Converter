@@ -59,7 +59,7 @@ namespace VdfParser.Test
 
             VdfDeserializer parser = new VdfDeserializer();
 
-            VdfTestExcerptUnsupported result = parser.Deserialize<VdfTestExcerptUnsupported>(sharedConfig);
+            VdfWithList result = parser.Deserialize<VdfWithList>(sharedConfig);
 
             Assert.Equal("Strategy", result.Steam.Apps["434460"].Tags[1]);
         }

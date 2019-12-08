@@ -1,10 +1,8 @@
-﻿using Microsoft.CSharp.RuntimeBinder;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using VdfConverter;
@@ -106,7 +104,24 @@ namespace VdfParser
             }
             catch (Exception ex)
             {
-                throw new VdfTypeException($"Error trying to instantiate object of type {targetObjectType.Name}", ex);
+                try
+                {
+                    var keys = src.Keys;
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach(var key in keys)
+                    {
+                        sb.Append($"Key: {key} - ");
+                        var val = src[key].ToString();
+                        sb.Append($"Value: {val} |");
+                    }
+
+                    throw new VdfTypeException($"Error trying to instantiate object of type {targetObjectType.Name}, while trying to cast {sb.ToString()} ", ex);
+                }
+                catch (Exception) // just make sure that we don't throw an exception while createing the exception message.
+                {
+                    throw new VdfTypeException($"Error trying to instantiate object of type {targetObjectType.Name}", ex);
+                }
             }
 
             // We need a collection for the Add method
@@ -133,7 +148,7 @@ namespace VdfParser
                     {
                         returnObj.Add(key, value);
                     }
-                    catch (RuntimeBinderException e1)
+                    catch (Exception e1) // TODO: use the correct exception for .Net Standard
                     {
                         if(e1.Message.Contains("invalid arguments"))
                         {
@@ -144,7 +159,7 @@ namespace VdfParser
                         {
                             returnObj.Add(value);
                         }
-                        catch(RuntimeBinderException e2)
+                        catch(Exception e2) // TODO: use the correct exception for .Net Standard
                         {
                             throw new VdfTypeException($"Error adding value to ICollection. Key: {key}. Value: {src[key]}", e2);
                         }
@@ -272,7 +287,7 @@ namespace VdfParser
                 }
             }
 
-            throw new Exception("Busy reading object, but reached end of file without a closing breace");
+            throw new VdfFormatException("Busy reading object, but reached end of file without a closing breace");
         }
 
         /// <summary>

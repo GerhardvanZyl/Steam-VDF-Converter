@@ -16,3 +16,4 @@
 /Steam-VDF-Converter/Properties/PublishProfiles
 /Steam-VDF-Converter/bin
 /VdfConverter.Test/bin/Release/netcoreapp2.2
+/VdfConverter.Test/bin/Release/netstandard2.0

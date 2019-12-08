@@ -65,6 +65,6 @@ namespace VdfParser.Test
 
     public class CustomRoot
     {
-        public MyDictionary<string, string> Apps { get; set; }
+        public MyDictionary<string, AppWithList> Apps { get; set; }
     }
 }

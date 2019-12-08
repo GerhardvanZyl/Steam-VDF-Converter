@@ -77,6 +77,18 @@ namespace VdfParser.Test
             Assert.True(result.Steam.DesktopShortcutCheck);
             Assert.Equal("Strategy", result.Steam.Apps["434460"].Tags["1"]);
         }
+        [Fact]
+        public void ParseAndCastCustomDictionary()
+        {
+            string sharedConfig = File.ReadAllText("cast-test.vdf");
+
+            VdfDeserializer parser = new VdfDeserializer();
+
+            CustomVdfExcerpt result = parser.Deserialize<CustomVdfExcerpt>(sharedConfig);
+
+            Assert.NotNull(result.Steam.Apps["434460"]);
+        }
+
 
     }
 }

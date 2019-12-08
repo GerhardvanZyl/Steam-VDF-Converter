@@ -48,4 +48,23 @@ namespace VdfParser.Test
         public bool StartMenuShortcutCheck { get; set; }
         public Dictionary<string, AppWithList> Apps { get; set; }
     }
+
+    public class MyDictionary<TKey, TValue> : Dictionary<TKey, TValue>
+    {
+
+        public new void Add(TKey key, TValue val)
+        {
+            base.Add(key, val);
+        }
+    }
+
+    public class CustomVdfExcerpt
+    {
+        public CustomRoot Steam { get; set; }
+    }
+
+    public class CustomRoot
+    {
+        public MyDictionary<string, string> Apps { get; set; }
+    }
 }

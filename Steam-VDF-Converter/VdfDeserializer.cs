@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CSharp.RuntimeBinder;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
@@ -97,7 +98,16 @@ namespace VdfParser
             
             // TODO: Check if it is generic first
             Type[] genericArguments = targetObjectType.GetGenericArguments();
-            dynamic returnObj = (dynamic)Activator.CreateInstance(targetObjectType);
+            dynamic returnObj;
+
+            try
+            {
+                returnObj = (dynamic)Activator.CreateInstance(targetObjectType);
+            }
+            catch (Exception ex)
+            {
+                throw new VdfTypeException($"Error trying to instantiate object of type {targetObjectType.Name}", ex);
+            }
 
             // We need a collection for the Add method
             bool isCollection = IsCollection(targetObjectType);
@@ -123,16 +133,20 @@ namespace VdfParser
                     {
                         returnObj.Add(key, value);
                     }
-                    catch (Exception)
+                    catch (RuntimeBinderException e1)
                     {
+                        if(e1.Message.Contains("invalid arguments"))
+                        {
+                            throw new VdfFormatException($"There is an error in the format of the VDF file/string for Property: {key} and Value: {value}");
+                        }
+
                         try
                         {
                             returnObj.Add(value);
                         }
-                        catch(Exception e)
+                        catch(RuntimeBinderException e2)
                         {
-                            e.Data.Add("AdditionalErrorInfo", $"Error adding value to ICollection. Key: {key}. Value: {src[key]}");
-                            throw;
+                            throw new VdfTypeException($"Error adding value to ICollection. Key: {key}. Value: {src[key]}", e2);
                         }
                     }
                 }

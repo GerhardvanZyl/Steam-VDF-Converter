@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>VdfConverter</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Gerhard van Zyl</Authors>
+    <Company>Gerhard van Zyl</Company>
+    <Product>Steam VDF Converter</Product>
+    <Description>A converter for the Steam VDF format.</Description>
+    <PackageProjectUrl>https://github.com/GerhardvanZyl/Steam-VDF-Converter</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GerhardvanZyl/Steam-VDF-Converter</RepositoryUrl>
+    <PackageTags>Steam VDF Converter Parser</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2019</Copyright>
+  </PropertyGroup>
+
+</Project>

@@ -8,3 +8,11 @@
 /Steam-VDF-Parser/bin/Debug/netcoreapp2.2
 /VdfParser.Test/bin/Debug/netcoreapp2.2
 /.vs/VdfConverter
+/Steam-VDF-Converter/bin/Debug/netcoreapp2.2
+/VdfConverter.Test/bin/Debug/netcoreapp2.2
+/VdfConverter.Test/obj/Debug/netcoreapp2.2
+/VdfConverter.Test/obj/Release/netcoreapp2.2
+/VdfConverter.Test/obj
+/Steam-VDF-Converter/Properties/PublishProfiles
+/Steam-VDF-Converter/bin
+/VdfConverter.Test/bin/Release/netcoreapp2.2

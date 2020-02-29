@@ -4,6 +4,10 @@ A C# parser for the Steam VDF file format.
 # Installation
 Nuget - https://www.nuget.org/packages/VdfConverter/1.0.0
 
+```
+ PM> Install-Package QRCoder
+```
+
 # Example Usage
 
 ```c#

@@ -14,11 +14,13 @@ Install-Package VdfConverter
   FileStream testFile = File.OpenRead("test.vdf");
   VdfDeserializer deserializer = new VdfDeserializer();
   dynamic result = deserializer.Deserialize(testFile);
-
+```
+```c#
   FileStream testFile = File.OpenRead("test.vdf");
   VdfDeserializer deserializer = new VdfDeserializer();
   SteamGames resultObj = deserializer.Deserialize<SteamGames>(testFile);
-
+```
+```c#
   VdfSerializer serializer = new VdfSerializer();
   string result = serializer.Serialize(resultObj);
 ```

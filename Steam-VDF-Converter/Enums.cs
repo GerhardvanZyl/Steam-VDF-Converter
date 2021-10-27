@@ -19,6 +19,7 @@
         Quote = '"',
         OpenBrace = '{',
         CloseBrace = '}',
+        BackSlash = '\\'
     }
 
 }

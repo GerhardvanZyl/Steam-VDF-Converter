@@ -339,21 +339,35 @@ namespace VdfParser
         private string ReadString(bool startedWithQuote = false)
         {
             bool cont = true;
+            bool shouldSkipNextCharacter = false;
             StringBuilder sb = new StringBuilder();
 
             while (cont)
             {
                 char c = (char)vdfFileReader.Read();
 
+                if (shouldSkipNextCharacter)
+                {
+                    shouldSkipNextCharacter = false;
+                    continue;
+                }
+
                 //TODO - Check for escape characters: \n, \t, \\, and \"
                 // But do we really have to? We can just ignore it, cant we?
 
                 // Check for space or tab if there wasn't a starting quote, or a double quote
                 // What about new line?
-                if ((startedWithQuote && c.Equals((char)ControlCharacters.Quote)) ||
-                    (!startedWithQuote && IsWhiteSpace(c)))
+                if ((startedWithQuote && c.Equals((char)ControlCharacters.Quote)) 
+                    || (!startedWithQuote && IsWhiteSpace(c)))
                 {
                     cont = false;
+                }
+                else if (c.Equals((char)ControlCharacters.BackSlash) 
+                    && vdfFileReader.Peek().Equals((char)ControlCharacters.Quote))
+                {
+                    // If there is an escaped quote, add it and continue parsing the string.
+                    shouldSkipNextCharacter = true;
+                    sb.Append("\"");
                 }
                 else
                 {

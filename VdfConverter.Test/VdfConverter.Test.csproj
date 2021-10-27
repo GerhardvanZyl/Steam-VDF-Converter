@@ -17,13 +17,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="cast-test-basic.vdf">
+    <None Update="InputFiles\cast-test-basic.vdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="cast-test.vdf">
+    <None Update="InputFiles\cast-test.vdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="sharedconfig.vdf">
+    <None Update="InputFiles\escaped-quotes.vdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="InputFiles\sharedconfig.vdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

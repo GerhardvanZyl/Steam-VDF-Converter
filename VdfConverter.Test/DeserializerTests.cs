@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using Xunit;
@@ -11,7 +11,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseSharedConfig()
         {
-            FileStream sharedConfig = File.OpenRead("sharedconfig.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/sharedconfig.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -28,7 +28,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseAndCastSimple()
         {
-            FileStream sharedConfig = File.OpenRead("cast-test-basic.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/cast-test-basic.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -41,7 +41,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseAndCast()
         {
-            FileStream sharedConfig = File.OpenRead("cast-test.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -55,7 +55,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseAndCastWithList()
         {
-            FileStream sharedConfig = File.OpenRead("cast-test.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -67,7 +67,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseAndCastString()
         {
-            string sharedConfig = File.ReadAllText("cast-test.vdf");
+            string sharedConfig = File.ReadAllText("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -80,7 +80,7 @@ namespace VdfParser.Test
         [Fact]
         public void ParseAndCastCustomDictionary()
         {
-            string sharedConfig = File.ReadAllText("cast-test.vdf");
+            string sharedConfig = File.ReadAllText("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -89,6 +89,17 @@ namespace VdfParser.Test
             Assert.NotNull(result.Steam.Apps["434460"]);
         }
 
+        [Fact]
+        public void ParseEscapedString()
+        {
+            string sharedConfig = File.ReadAllText("./InputFiles/escaped-quotes.vdf");
+
+            VdfDeserializer parser = new VdfDeserializer();
+
+            var result = parser.Deserialize(sharedConfig);
+
+            Assert.Equal("Ричард написал статью, которую одобрили сторонники \"«Переломного момента»\".", result.desc.russian);
+        }
 
     }
 }

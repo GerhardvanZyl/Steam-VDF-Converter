@@ -11,7 +11,7 @@ namespace VdfParser.Test
         [Fact]
         public void Serialize_Dictionary()
         {
-            FileStream sharedConfig = File.OpenRead("cast-test.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -34,7 +34,7 @@ namespace VdfParser.Test
         [Fact]
         public void Serialize_List()
         {
-            FileStream sharedConfig = File.OpenRead("cast-test.vdf");
+            FileStream sharedConfig = File.OpenRead("./InputFiles/cast-test.vdf");
 
             VdfDeserializer parser = new VdfDeserializer();
 
@@ -42,8 +42,6 @@ namespace VdfParser.Test
 
             VdfSerializer serializer = new VdfSerializer();
             string result = serializer.Serialize(obj);
-
-            File.WriteAllText(@"F:\result.txt", result);
 
             parser = new VdfDeserializer();
 

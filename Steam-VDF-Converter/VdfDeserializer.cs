@@ -10,10 +10,10 @@ using VdfConverter.Enums;
 
 namespace VdfParser
 {
-    public class VdfDeserializer : VdfBase
+    public class VdfDeserializer : VdfBase, IDisposable
     {
         // If we dont use a using, how does this affect memory?
-        private TextReader vdfFileReader;
+        private TextReader _vdfFileReader;
 
         private bool ignoreDictionaryTypeMismatch;
 
@@ -70,7 +70,7 @@ namespace VdfParser
             dynamic result = new ExpandoObject() as IDictionary<string, dynamic>;
 
             // Using the vdfFileReader to the member variable.
-            using (vdfFileReader = new StreamReader(vdfFile))
+            using (_vdfFileReader = new StreamReader(vdfFile))
             {
                 result = ParseObject();
             }
@@ -88,7 +88,7 @@ namespace VdfParser
             dynamic result = new ExpandoObject() as IDictionary<string, dynamic>;
 
             // Using the vdfFileReader to the member variable.
-            using (vdfFileReader = new StringReader(vdfFile))
+            using (_vdfFileReader = new StringReader(vdfFile))
             {
                 result = ParseObject();
             }
@@ -282,13 +282,11 @@ namespace VdfParser
             if(!ReadNextKey(out string key))
             {
                 // just create an empty dictionary to satisfy return signature requirements. Won't be used anyway.
-                kvp = new KeyValuePair<string, dynamic>(); 
                 return false;
             }
 
-
             int tmp;
-            while((tmp = vdfFileReader.Read()) != -1)
+            while((tmp = _vdfFileReader.Read()) != -1)
             {
                 char c = (char)tmp;
 
@@ -305,7 +303,6 @@ namespace VdfParser
 
                     // Closing brace means we're done with this object
                     case (char)ControlCharacters.CloseBrace:
-                        kvp = new KeyValuePair<string, dynamic>(); // just create an empty object. Won't be used anyway.
                         return false; 
                     
                     // In this case it will be the beginning. We will read the closing quote in the ReadString method
@@ -332,7 +329,7 @@ namespace VdfParser
         private bool ReadNextKey(out string key)
         {
             int tmp;
-            while ((tmp = vdfFileReader.Read()) != -1)
+            while ((tmp = _vdfFileReader.Read()) != -1)
             {
                 char c = (char)tmp;
 
@@ -378,7 +375,7 @@ namespace VdfParser
 
             while (cont)
             {
-                char c = (char)vdfFileReader.Read();
+                char c = (char)_vdfFileReader.Read();
 
                 if (shouldSkipNextCharacter)
                 {
@@ -386,7 +383,7 @@ namespace VdfParser
                     continue;
                 }
 
-                //TODO - Check for escape characters: \n, \t, \\, and \"
+                //TODO - Check for escape characters: \n, \t, \\
                 // But do we really have to? We can just ignore it, cant we?
 
                 // Check for space or tab if there wasn't a starting quote, or a double quote
@@ -397,7 +394,7 @@ namespace VdfParser
                     cont = false;
                 }
                 else if (c.Equals((char)ControlCharacters.BackSlash) 
-                    && vdfFileReader.Peek().Equals((char)ControlCharacters.Quote))
+                    && _vdfFileReader.Peek().Equals((char)ControlCharacters.Quote))
                 {
                     // If there is an escaped quote, add it and continue parsing the string.
                     shouldSkipNextCharacter = true;
@@ -416,6 +413,11 @@ namespace VdfParser
         {
             // Don't do type checking for now. It should fail if the character isn't an int.
             return Enum.IsDefined(typeof(WhitespaceCharacters), (int)c);
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)_vdfFileReader).Dispose();
         }
     }
 }

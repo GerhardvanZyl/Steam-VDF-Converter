@@ -1,0 +1,19 @@
+﻿"libraryfolders"
+{
+	"0" "111"
+    "1" 
+	{
+		"path"		"/path/to/another/steam/library"
+		"label"		""
+		"contentid"		"6490088256208813928"
+		"totalsize"		"983429038080"
+		"update_clean_bytes_tally"		"14876393334"
+		"time_last_update_corruption"		"0"
+		"apps"
+		{
+			"240"		"4585213376"
+			"620"		"12718399062"
+			"629"		"118928983"
+		}
+	}
+}

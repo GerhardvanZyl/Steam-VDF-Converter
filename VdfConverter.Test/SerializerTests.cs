@@ -20,7 +20,7 @@ namespace VdfParser.Test
             VdfSerializer serializer = new VdfSerializer();
             string result = serializer.Serialize(obj);
 
-            File.WriteAllText(@"F:\result.txt", result);
+            File.WriteAllText(@"./result.txt", result);
 
             parser = new VdfDeserializer();
 

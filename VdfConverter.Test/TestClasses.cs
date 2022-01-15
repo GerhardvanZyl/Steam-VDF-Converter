@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace VdfParser.Test
 {
@@ -67,4 +66,22 @@ namespace VdfParser.Test
     {
         public MyDictionary<string, AppWithList> Apps { get; set; }
     }
+
+    public class LibraryFolder
+    {
+        public string path { get; set; }
+
+        public string label { get; set; }
+    }
+
+    public class LibraryFolders<TKey, TValue> : Dictionary<TKey, TValue>
+    {
+        public string contentstatsid { get; set; }
+    }
+
+    public class Library
+    {
+        public LibraryFolders<int, LibraryFolder> libraryfolders { get; set; }
+    }
+
 }

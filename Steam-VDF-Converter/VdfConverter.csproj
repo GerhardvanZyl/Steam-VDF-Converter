@@ -3,7 +3,7 @@
   <PropertyGroup>
  	<TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>VdfConverter</AssemblyName>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Authors>Gerhard van Zyl</Authors>
     <Company>Gerhard van Zyl</Company>
     <Product>Steam VDF Converter</Product>
@@ -12,7 +12,16 @@
     <RepositoryUrl>https://github.com/GerhardvanZyl/Steam-VDF-Converter</RepositoryUrl>
     <PackageTags>Steam VDF Converter Parser</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Copyright>Copyright 2019</Copyright>
+    <Copyright>Copyright 2021</Copyright>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Fixed a bug where a dictionary with additional properties threw an error. Now supports a flag to ignore, or add as part of a derived dictionary</PackageReleaseNotes>
+    <RepositoryType>Github</RepositoryType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

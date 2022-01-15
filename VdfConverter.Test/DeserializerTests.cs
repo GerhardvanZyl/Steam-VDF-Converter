@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using Xunit;
@@ -101,5 +102,42 @@ namespace VdfParser.Test
             Assert.Equal("Ричард написал статью, которую одобрили сторонники \"«Переломного момента»\".", result.desc.russian);
         }
 
+        [Fact]
+        public void ParseDictionaryWithExtraProperty()
+        {
+            string sharedConfig = File.ReadAllText("./InputFiles/dictionary-extra-prop.vdf");
+
+            VdfDeserializer parser = new VdfDeserializer();
+
+            Library result = parser.Deserialize<Library>(sharedConfig);
+
+            Assert.Equal(2, result.libraryfolders.Count);
+            Assert.Equal("-1882263624787241560", result.libraryfolders.contentstatsid);
+        }
+
+        [Fact]
+        public void ParseDictionaryWithMismatchedType_Error()
+        {
+            string sharedConfig = File.ReadAllText("./InputFiles/dictionary-mismatch-type.vdf");
+            VdfDeserializer parser = new VdfDeserializer();
+
+            Assert.ThrowsAny<Exception>(() => 
+            { 
+                Library result = parser.Deserialize<Library>(sharedConfig);
+                
+                Console.WriteLine(result.libraryfolders.contentstatsid);
+            });
+        }
+
+        [Fact]
+        public void ParseDictionaryWithMismatchedType_IgnoreTypeMismatch()
+        {
+            string sharedConfig = File.ReadAllText("./InputFiles/dictionary-mismatch-type.vdf");
+            VdfDeserializer parser = new VdfDeserializer(true);
+
+            Library result = parser.Deserialize<Library>(sharedConfig);
+            
+            Assert.Single(result.libraryfolders);
+        }
     }
 }

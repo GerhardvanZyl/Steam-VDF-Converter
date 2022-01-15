@@ -1,0 +1,37 @@
+﻿"libraryfolders"
+{
+	"contentstatsid"		"-1882263624787241560"
+	"0"
+	{
+		"path"		"/path/to/steam/library"
+		"label"		""
+		"contentid"		"-1882263624787241560"
+		"totalsize"		"0"
+		"update_clean_bytes_tally"		"26553169288"
+		"time_last_update_corruption"		"0"
+		"apps"
+		{
+			"228980"		"940416973"
+			"250820"		"5823064401"
+			"858280"		"375543351"
+			"961940"		"399675883"
+			"1391110"		"639290775"
+			"1580130"		"1107619726"
+		}
+	}
+    "1"
+	{
+		"path"		"/path/to/another/steam/library"
+		"label"		""
+		"contentid"		"6490088256208813928"
+		"totalsize"		"983429038080"
+		"update_clean_bytes_tally"		"14876393334"
+		"time_last_update_corruption"		"0"
+		"apps"
+		{
+			"240"		"4585213376"
+			"620"		"12718399062"
+			"629"		"118928983"
+		}
+	}
+}

@@ -15,6 +15,21 @@ namespace VdfParser
         // If we dont use a using, how does this affect memory?
         private TextReader vdfFileReader;
 
+        private bool ignoreDictionaryTypeMismatch;
+
+        public VdfDeserializer() { }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ignoreAdditionalDictionaryProperties"> If set to true, any class of type Dictionary will ignore values that doesn't match the
+        /// type. By default it will throw an exception if the types doesn't match.
+        /// </param>
+        public VdfDeserializer(bool ignoreDictionaryTypeMismatch)
+        {
+            this.ignoreDictionaryTypeMismatch = ignoreDictionaryTypeMismatch;
+        }
+
         /// <summary>
         /// Parse the VDF Stream and casts it to the supplied type
         /// </summary>
@@ -87,7 +102,7 @@ namespace VdfParser
         /// <param name="targetObjectType">Type of the object to map to</param>
         /// <param name="source">Source from which to read the value</param>
         /// <returns></returns>
-
+        // TODO: method is becoming clunky. Split into smaller methods
         // We could have used a generic method, but because the type will be reflected when it is called recursively, this is the easier solution
         private object Map(Type targetObjectType, ExpandoObject source)
         {
@@ -137,7 +152,7 @@ namespace VdfParser
                     // If the value type is string, then we don't need to instantiate the value and go through the reflection code again,
                     // otherwise we need to instantiate and map.
                     // We can just check for string, since it is the only simple type we read from the file/string
-                    if (value.GetType() != typeof(string)) 
+                    if ( value.GetType() != typeof(string)) 
                     {
                         value = Map(genericArguments[1], value);
                     }
@@ -146,7 +161,27 @@ namespace VdfParser
                     // And at the moment, we will use the lazy try catch method
                     try
                     {
-                        returnObj.Add(key, value);
+                        if (!ignoreDictionaryTypeMismatch || (ignoreDictionaryTypeMismatch && value.GetType() == genericArguments[1]))
+                        {
+                            // Check if it's the correct type. This will be handled after the IsCollection if statement
+                            // If it's the correct type, verify that it exists as another property on the class. If not, let it continue and throw an exception
+                            if (targetObjectType.GetProperties().Where(x => x.CanWrite && x.Name == key).Count() != 1)
+                            {
+                                if (genericArguments[0] == typeof(int))
+                                {
+                                    // Don't worry about type safety. The exception will inform the user.
+                                    returnObj.Add(int.Parse(key), value);
+                                }
+                                else
+                                {
+                                    // string is default;
+                                    returnObj.Add(key, value);
+                                }
+
+                                // What about GUID and other ID formats? Is there even such a use case?
+                                // TODO: Implement support for Collections
+                            }
+                        }
                     }
                     catch (Exception e1) // TODO: use the correct exception for .Net Standard
                     {
@@ -166,12 +201,11 @@ namespace VdfParser
                     }
                 }
             }
-            else // It is not a dictionary, so it is a simple property on an object that should be assigned a value.
+            
+            // Dictionaries (derived) or regular classes can have properties.
+            foreach (PropertyInfo destinationProperty in targetObjectType.GetProperties().Where(x => x.CanWrite))
             {
-                foreach (PropertyInfo destinationProperty in targetObjectType.GetProperties().Where(x => x.CanWrite))
-                {
-                    SetProperty(destinationProperty, src, returnObj);
-                }
+                SetProperty(destinationProperty, src, returnObj);
             }
 
             return returnObj;
